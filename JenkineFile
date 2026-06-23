@@ -9,11 +9,16 @@ pipeline {
             }
         }
 
-        stage('Run Specific API Test') {
+        stage('Run Test') {
             steps {
                 bat 'npx playwright test tests/ApiTesting.spec.ts'
             }
         }
 
+        stage('Upload Report To S3') {
+            steps {
+                bat 'aws s3 sync playwright-report s3://playwright-apitest-reports-suraj/'
+            }
+        }
     }
 }
