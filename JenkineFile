@@ -15,16 +15,17 @@ pipeline {
             }
         }
 
-        stage('Check AWS') {
-            steps {
-                bat 'aws --version'
-                bat 'aws s3 ls'
-            }
-        }
-
         stage('Upload Report To S3') {
             steps {
-                bat 'aws s3 sync playwright-report s3://playwright-apitest-reports-suraj/'
+
+                withCredentials([usernamePassword(
+                    credentialsId: 'aws-s3',
+                    usernameVariable: 'AWS_ACCESS_KEY_ID',
+                    passwordVariable: 'AWS_SECRET_ACCESS_KEY'
+                )]) {
+
+                    bat 'aws s3 sync playwright-report s3://playwright-apitest-reports-suraj/'
+                }
             }
         }
     }
