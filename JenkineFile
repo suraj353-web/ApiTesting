@@ -41,7 +41,6 @@ Hello,
 Playwright execution completed.
 
 Job Name : ${env.JOB_NAME}
-Build Number : ${env.BUILD_NUMBER}
 Build Status : ${currentBuild.currentResult}
 
 HTML Report:
