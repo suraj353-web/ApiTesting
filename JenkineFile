@@ -15,6 +15,13 @@ pipeline {
             }
         }
 
+        stage('Check AWS') {
+            steps {
+                bat 'aws --version'
+                bat 'aws s3 ls'
+            }
+        }
+
         stage('Upload Report To S3') {
             steps {
                 bat 'aws s3 sync playwright-report s3://playwright-apitest-reports-suraj/'
