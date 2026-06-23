@@ -29,4 +29,28 @@ pipeline {
             }
         }
     }
+
+    post {
+        always {
+            emailext(
+                to: 'surajgcp353@gmail.com',
+                subject: "Playwright Execution - ${currentBuild.currentResult}",
+                body: """
+Hello,
+
+Playwright execution completed.
+
+Job Name : ${env.JOB_NAME}
+Build Number : ${env.BUILD_NUMBER}
+Build Status : ${currentBuild.currentResult}
+
+HTML Report:
+https://playwright-apitest-reports-suraj.s3.amazonaws.com/index.html
+
+Regards,
+Jenkins
+"""
+            )
+        }
+    }
 }
