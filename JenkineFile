@@ -1,14 +1,7 @@
 pipeline {
-
     agent any
 
     stages {
-
-        stage('Checkout') {
-            steps {
-                echo 'Cloning repository'
-            }
-        }
 
         stage('Install Dependencies') {
             steps {
@@ -16,13 +9,7 @@ pipeline {
             }
         }
 
-        stage('Install Playwright Browsers') {
-            steps {
-                bat 'npx playwright install'
-            }
-        }
-
-        stage('Run API Tests') {
+        stage('Run Specific API Test') {
             steps {
                 bat 'npx playwright test tests/ApiTesting.spec.ts'
             }
